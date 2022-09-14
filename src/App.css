@@ -1,38 +1,171 @@
 .App {
   text-align: center;
+  width: 80%;
+  margin: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.postList {
+  width: 80%;
+  margin: 15px auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.postList .deleteBtn {
+  padding: 10px 5px;
+  color: white;
+  background-color: orange;
+  font-size: 25px;
+  border: 0px;
+  border-radius: 25px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.postList .alert {
+  background-color: red;
+  color: white;
+  font-size: 15px;
+  margin: 10px auto;
+  padding: 5px 2px;
+}
+
+.postList .alertOff {
+  background-color: white;
+  color: white;
+  font-size: 15px;
+  margin: 10px auto;
+  padding: 5px 2px;
+}
+
+.postList .post{
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  border: 2px solid #ccc;
+  margin: 10px auto;
+  padding: 5px;
+  box-shadow: 5px 5px 3px gray;
+}
+
+.postList .post .clearPost{
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  right: 0;
+  background-color: #eee;
+}
+
+.postList .post .title{
+ font-size: 30px;
+ font-family: 'Roboto', sans-serif; 
+}
+
+.postList .post .content {
+  font-size: 23px;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.CreatePost {
+  width: 70%;
+  margin: auto;
+  border: 2px solid #eee;
+}
+
+.CreatePost form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+
+.CreatePost .title {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.CreatePost .title label, .CreatePost .content label{
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;  
+  color: gray;
+}
+
+.CreatePost input[type=text] {
+  width: 170px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.4s ease-in-out;
+  font-size: 20px;
+}
+
+.CreatePost input[type=text]:focus {
+  width: 250px;
+}
+
+.CreatePost .content {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.CreatePost textarea {
+  width: 80%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  margin: auto;
+}
+
+.CreatePost button {
+  margin: 20px auto;
+  width: 200px;
+  height: 50px;
+  background-color: aquamarine;
+  color: gray;
+  font-size: 25px;
+}
+
+.CreatePost button:hover {
+  background-color: rgb(30, 97, 160);
+  color: #eee;
+}
+
+.CreatePost .alert {
+  background-color: red;
   color: white;
+  font-size: 15px;
+  margin: 10px auto;
+  padding: 5px 2px;
 }
 
-.App-link {
-  color: #61dafb;
+.CreatePost .alertOff {
+  background-color: white;
+  color: white;
+  font-size: 15px;
+  margin: 10px auto;
+  padding: 5px 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 600px) {
+
+  .App {
+      width: 100%;
+    }
+  
+  .CreatePost {
+    width: 95%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .CreatePost textarea {
+    width: 90%;
   }
+
 }

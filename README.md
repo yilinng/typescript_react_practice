@@ -44,3 +44,19 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Start server
+
+#### https://www.npmjs.com/package/json-server
+
+#### 1.Install JSON Server
+
+```
+yarn install -g json-server
+```
+
+#### 2.Start JSON Server
+
+```
+json-server --watch data/db.json --port 3001
+```
