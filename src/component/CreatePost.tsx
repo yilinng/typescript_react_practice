@@ -9,7 +9,8 @@ const CreatePost: React.FC<CreateProps> = (props) => {
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string>('')
   const [alert, setAlert] = useState<string>('')
-  const [error ,setError] = useState<string>('')
+  const [error, setError] = useState<string>('')
+  const [isDisabled, setDisabled] = useState(false);
 
 
   const handleClick = (event:any) => {
@@ -20,22 +21,24 @@ const CreatePost: React.FC<CreateProps> = (props) => {
       return
     }
 
+    setDisabled(true)
+
     const post = {
       title,
       content
     }
 
-    fetch('http://localhost:3001/posts', {
-    method: 'POST', // or 'PUT'
-    body: JSON.stringify(post), // data can be `string` or {object}!
-    headers: new Headers({
-      'Content-Type': 'application/json'
+    fetch('/posts', {
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(post), // data can be `string` or {object}!
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
     })
-    })
-    .then(res => res.json())
-    .catch(error => setError(error))
-    .then(() => props.handleProps(true))
-    .finally(() => { setTitle(''); setContent('')})
+      .then(res => res.json())
+      .catch(error => setError(error))
+      .then(() => props.handleProps(true))
+      .finally(() => { setTitle(''); setContent(''); setDisabled(false)})
   }
 
 
@@ -65,7 +68,7 @@ const CreatePost: React.FC<CreateProps> = (props) => {
           </span> :
           <span className='alertOff'>you have to input some text...</span>
         }
-        <button onClick={(event) => handleClick(event)}>Click</button>
+        <button onClick={(event) => handleClick(event)} disabled={isDisabled}>Click</button>
       </form>
     </div>
   )
