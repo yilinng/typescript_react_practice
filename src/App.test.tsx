@@ -55,10 +55,3 @@ test('Displays 3 posts initially', async () => {
   expect(items).toHaveLength(3)
 });
 
-
-test('create new post', async () => {
-  render(<App />)
-  // Wait for page to update with query text
-  const items = await screen.findAllByTestId('clearPost')
-  expect(items).toHaveLength(3)
-});

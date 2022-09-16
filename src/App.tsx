@@ -6,11 +6,13 @@ import Post from './component/Post'
 //import posts from './data/posts'
 import CreatePost from './component/CreatePost'
 import './App.css';
+import Spinner from './component/Spinner'
 
+/*
 class StatusError extends Error {
   status: number | undefined;
 }
-
+*/
 function App() {
 
   const item = {
@@ -22,7 +24,8 @@ function App() {
   const [newPost, setNewPost] = useState(false) 
   const [clickPost, setClickPost] = useState<any[]>([])
   const [error, setError] = useState<string>('')
-  const [isDisabled, setDisabled] = useState(false);
+  const [isDisabled, setDisabled] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleInputChange = (event:any, id:number) => {
     const target = event.target;
@@ -66,7 +69,8 @@ function App() {
   }
 
   const getPosts = async () => {
-    const response = await fetch('/posts');
+    /*
+    const response = await fetch(process.env.REACT_APP_URL + '/posts');
 
     const data = await response.json();
 
@@ -76,6 +80,17 @@ function App() {
       throw err;
     }
     setPosts(data);
+    */
+    setLoading(true)
+    fetch('/posts', {
+      method: 'GET', // or 'PUT'
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+      .then(res => res.json())
+      .catch(error => setError(error))
+      .then(response => { setPosts(response); setLoading(false) })
   };
 
   useEffect(() => {
@@ -92,8 +107,8 @@ function App() {
       getPosts();
       setNewPost(false)
     }
-  },[newPost])
-
+  }, [newPost])
+  
   return (
     <main>
       <div className="App">
@@ -113,13 +128,13 @@ function App() {
           }
           <form>
           <button className='deleteBtn' onClick={(e)=>handleDelete(e)} disabled={isDisabled}>delete post</button>
-          {posts.map(({ id, title, content }) => (
+          {!loading ? posts && posts.map(({ id, title, content }) => (
             <div className='post' key={id}>
               <input data-testid="clearPost" className='clearPost' type="checkbox" onChange={(event) => handleInputChange(event, id)} key={id} />
                 <Post className='title'>{title} </Post>
                 <Post className='content'>{content} </Post>
               </div>
-          ))}
+          )): <Spinner />}
            </form> 
         </Posts>
         <CreatePost handleProps={handleProps} />
